@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "Reddit Search",
+  "description": "This extension allows you to easily search reddit by using Google's search engine",
+  "version": "1.0",
+
+  "browser_action": {
+
+  },
+  "permissions": [
+    "activeTab",
+    "https://ajax.googleapis.com/"
+  ]
+}
