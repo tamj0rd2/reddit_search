@@ -1,0 +1,11 @@
+/* This file adds styling to popup.html */
+
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background: #f9f9f9;
+}
