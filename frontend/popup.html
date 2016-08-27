@@ -3,9 +3,10 @@
   <head>
     <meta charset="utf-8">
     <title>Reddit Search</title>
+    <link rel="stylesheet" href="popup.css">
   </head>
   <body>
-    <form class="" action="#">
+    <form class="" action="#" onsubmit="return false">
       <div class="">
         <label for="google_domain">Google Domain: </label>
         <input type="text" id="google_domain" name="google_domain" placeholder="google.com">
@@ -17,8 +18,11 @@
       <div class="">
         <label for="search_query">Search query: </label>
         <input type="text" id="search_query" name="search_query" placeholder="How do I grow a beard?">
+        <small>This area cannot be left empty!</small>
       </div>
-      <button type="submit">Search</button>
+      <a href='' id="searchButton">Search</a>
     </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
   </body>
 </html>
