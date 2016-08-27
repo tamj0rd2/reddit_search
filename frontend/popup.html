@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Reddit Search</title>
+    <link rel="stylesheet" href="popup.css">
+  </head>
+  <body>
+    <form class="" action="#" onsubmit="return false">
+      <div class="">
+        <label for="google_domain">Google Domain: </label>
+        <input type="text" name="google_domain" id="google_domain" value="" placeholder="google.com">
+      </div>
+      <div class="">
+        <label for="subreddit">Subreddit: </label>
+        <input type="text" name="subreddit" id="subreddit" value="" placeholder="r/subreddit">
+      </div>
+      <div class="">
+        <label for="search_query">Search query: </label>
+        <input type="text" name="search_query" id="search_query" value="" placeholder="How do I grow a beard?">
+        <small>This area cannot be left empty!</small>
+      </div>
+      <div class="button">
+        <a href='' id="searchButton">Search</a>
+      </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+    <script type="text/javascript" src="popup.js"></script>
+  </body>
+</html>
