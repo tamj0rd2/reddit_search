@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('small').hide();    
   };
 
-  $('form').on('submit', function(){
+  $('button').on('click', function(){
     if(!$('#search_query').val()){
       $('#search_query').addClass('warning');
       $('small').show();
