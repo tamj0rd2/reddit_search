@@ -5,7 +5,7 @@ $(document).ready(function(){
     $('small').hide();    
   };
 
-  $('button').on('click', function(){
+  $('form').on('submit', function(){
     if(!$('#search_query').val()){
       $('#search_query').addClass('warning');
       $('small').show();
@@ -27,6 +27,6 @@ $(document).ready(function(){
       window.location.href = 'https://www.' + $('#google_domain').val() + '/#q=site:www.reddit.com%2F' + $('#subreddit').val() + '+' + $('#search_query').val();
       removeWarn();        
     }
-  })
+  });
   
 });
