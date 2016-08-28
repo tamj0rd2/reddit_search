@@ -1,5 +1,5 @@
 .warning{
- outline: red solid 1px;
+ outline: red solid 1px!important;
 }
 small{
   color: red;
