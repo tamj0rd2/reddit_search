@@ -6,21 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reddit Search</title>
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="popup.css">
   </head>
   <div class="container" style="min-width: 300px;">
     <body>
-      <form action="#">
-        <div class="form-group">
-          <label for="google_domain">Google Domain: </label>
-          <input type="text" class="form-control" id="google_domain" placeholder="google.com">
-        </div>
+      <form class="" onsubmit="return false">
         <div class="form-group">
           <label for="subreddit">Subreddit: </label>
           <input type="text" class="form-control" id="subreddit" placeholder="r/subreddit">
         </div>
-        <div class="form-group">
+        <div class="form-group query_group">
           <label for="search_query">Search query: </label>
           <input type="text" class="form-control" id="search_query" placeholder="How do I grow a beard?">
+          <small>This area cannot be left empty!</small>
         </div>
         <button type="submit" class="btn btn-default">Search</button>
       </form>
@@ -28,4 +26,5 @@
   </div>
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
+  <script type="text/javascript" src="popup.js"></script>
 </html>
