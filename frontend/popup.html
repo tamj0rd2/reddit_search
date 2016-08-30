@@ -15,9 +15,10 @@
           <label for="subreddit">Subreddit:</label>
           <div class="input-group">
             <span class="input-group-addon">r/</span>
-            <input type="text" class="form-control" id="subreddit" placeholder="subreddit"
-                   autofocus>
+            <input type="text" class="form-control" id="subreddit" list="sub_feed" placeholder="subreddit"
+                   autocomplete="on" autofocus>
           </div>
+          <datalist id="sub_feed"></datalist>
         </div>
         <div id="query_group" class="form-group">
           <label class="control-label" for="search_query">Search query:</label>
@@ -32,4 +33,5 @@
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
   <script src="popup.js"></script>
+  <script src="suggestions.js"></script>
 </html>
