@@ -1,14 +1,16 @@
 //file to implement autocomplete functionality
 
+var main= function(){
   console.log("working");
     
   //Adding autocomplete to subreddit search box
 
   //get the value in the search box
   $("#subreddit").keyup(function() {
-    console.log("keyup working");
-    var val = $("#subreddit").val();
-    if(val > 3){
+    var val = $("input#subreddit").val();
+    
+    //search only if the length of val in the input box is 4 or greater
+    if(val.length > 3){
       $.ajax({
         url: "https://www.reddit.com/search.json?q="+val+"&type=sr",
         dataType: "json",
@@ -39,7 +41,21 @@
               }
             }
           }
+
+          //not working 
+          var sub_feed_style= {
+                                "background" : "white",
+                                "padding" : "2px",
+                                "color" : "#333"
+                              };
+          $("#subreddit option").css(sub_feed_style);
         }  
       });
     }
+    else {
+      $("#sub_feed").empty();
+    }
   });
+};
+
+$(document).ready(main);
