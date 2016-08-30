@@ -12,17 +12,19 @@
       <form action="#">
         <div class="form-group">
           <label for="google_domain">Google Domain: </label>
-          <input type="text" class="form-control" id="google_domain" placeholder="google.com">
+          <input type="text" class="form-control" id="google_domain" placeholder="google.com" autocomplete="on">
+          <datalist id="domain-feed"></datalist>
         </div>
         <div class="form-group">
           <label for="subreddit">Subreddit: </label>
-          <input type="text" class="form-control" id="subreddit" placeholder="r/subreddit">
+          <input type="text" class="form-control" id="subreddit" placeholder="r/subreddit" autocomplete="on" required>
+          <datalist id="sub-feed"></datalist>
         </div>
         <div class="form-group">
           <label for="search_query">Search query: </label>
           <input type="text" class="form-control" id="search_query" placeholder="How do I grow a beard?">
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </form>
     </body>
   </div>
