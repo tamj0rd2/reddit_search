@@ -1,7 +1,7 @@
 $(document).ready(function(){
   
-  //Declaring a function to be used when the 'invalid form' warning should be removed.
   var removeWarn = function(){
+    //Declaring a function to be used when the 'invalid form' warning should be removed.
     $('.query_group').removeClass('has-error');
     $('small').hide();    
   };
@@ -26,3 +26,5 @@ $(document).ready(function(){
   });
   
 });
+
+
