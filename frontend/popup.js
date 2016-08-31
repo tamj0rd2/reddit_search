@@ -17,7 +17,8 @@ $(document).ready(function () {
   }
 
   function search() {
-
+    var url = createSearchUrl();
+    window.open(url, '_blank').focus();
   }
 
   $('button').click(function () {
