@@ -22,6 +22,14 @@ $(document).ready(function () {
   }
 
   $('button').click(function () {
-
+    if ($('#search_query').val()) {
+      /* if search_query has a value, perform the search */
+      search();
+    } else {
+      /* otherwise show warnings */
+      $('#query_group').addClass('has-error');
+      $('#help1').removeClass('vishid');
+      return false;
+    }
   });
 });
