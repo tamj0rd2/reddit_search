@@ -6,23 +6,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Reddit Search</title>
     <link rel="stylesheet" href="bootstrap.min.css">
+    <link rel="stylesheet" href="popup.css">
   </head>
   <div class="container" style="min-width: 300px;">
     <body>
-      <form action="#">
+      <form>
         <div class="form-group">
           <label for="google_domain">Google Domain: </label>
-          <input type="text" class="form-control" id="google_domain" list="domain_feed" placeholder="google.com" autocomplete="on">
-          <datalist id="domain_feed"></datalist>
+          <input type="text" class="form-control" id="google_domain" placeholder="google.com">
         </div>
         <div class="form-group">
           <label for="subreddit">Subreddit: </label>
-          <input type="text" class="form-control" id="subreddit" list="sub_feed" placeholder="r/subreddit" autocomplete="on" required>
+          <input type="text" class="form-control" id="subreddit" list="sub_feed" placeholder="r/subreddit" autocomplete="on">
           <datalist id="sub_feed"></datalist>
         </div>
-        <div class="form-group">
-          <label for="search_query">Search query: </label>
-          <input type="text" class="form-control" id="search_query" placeholder="How do I grow a beard?">
+        <div id="query_group" class="form-group">
+          <label class="control-label" for="search_query">Search query:</label>
+          <input type="text" class="form-control" id="search_query" aria-describedby="help1"
+                 placeholder="How do I grow a beard?" required>
+          <small id="help1" class="help-block vishid">This area cannot be left empty!</small>
         </div>
         <button type="submit" class="btn btn-primary">Search</button>
       </form>
@@ -31,4 +33,5 @@
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
   <script src="suggestions.js"></script>
+  <script src="popup.js"></script>
 </html>
