@@ -12,9 +12,12 @@
     <body>
       <form>
         <div class="form-group">
-          <label for="subreddit">Subreddit: </label>
-          <input type="text" class="form-control" id="subreddit" list="sub_feed" placeholder="r/subreddit" autocomplete="on">
-          <datalist id="sub_feed"></datalist>
+          <label for="subreddit">Subreddit:</label>
+          <div class="input-group">
+            <span class="input-group-addon">r/</span>
+            <input type="text" class="form-control" id="subreddit" placeholder="subreddit" list="sub_feed" autocomplete="on">
+            <datalist id="sub_feed"></datalist>
+          </div>
         </div>
         <div id="query_group" class="form-group">
           <label class="control-label" for="search_query">Search query:</label>
