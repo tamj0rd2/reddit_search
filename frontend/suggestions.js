@@ -8,13 +8,16 @@ var main = function() {
 
   $("#subreddit").keyup(function() {
 
+    $("#sub_feed").empty();
+
     //continuously get the value in the search field
 
     var val = $("input#subreddit").val();
     
     //search only if the length of val in the input box is 4 or greater
 
-    if (val.length > 3) {
+    if (val.length > 2) {
+
       $.ajax( {
         url: "https://www.reddit.com/search.json?q="+val+"&type=sr",
         dataType: "json",
