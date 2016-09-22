@@ -15,20 +15,22 @@
           <label for="subreddit">Subreddit:</label>
           <div class="input-group">
             <span class="input-group-addon">r/</span>
-            <input type="text" class="form-control" id="subreddit" placeholder="subreddit">
+            <input type="text" class="form-control" id="subreddit" placeholder="subreddit" list="sub_feed" autocomplete="on">
+            <datalist id="sub_feed"></datalist>
           </div>
         </div>
         <div id="query_group" class="form-group">
           <label class="control-label" for="search_query">Search query:</label>
           <input type="text" class="form-control" id="search_query" aria-describedby="help1"
-                 placeholder="How do I grow a beard?">
+                 placeholder="How do I grow a beard?" required>
           <small id="help1" class="help-block vishid">This area cannot be left empty!</small>
         </div>
-        <button type="submit" class="btn btn-default">Search</button>
+        <button type="submit" class="btn btn-primary">Search</button>
       </form>
     </body>
   </div>
   <script src="jquery.min.js"></script>
   <script src="bootstrap.min.js"></script>
+  <script src="suggestions.js"></script>
   <script src="popup.js"></script>
 </html>
