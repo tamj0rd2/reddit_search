@@ -1,64 +1,78 @@
-/*jslint browser: true indent:2 maxlen: 80*/
+/*jslint browser: true plusplus: true indent:2 maxlen: 80*/
 /*global $, jQuery, alert, console*/
 
-//implement autocomplete functionality
-
-var main = function() {
+$(document).ready(function () {
   'use strict';
 
-  //get the value in the search box
-  $("#subreddit").keyup(function() {
+  function feedTooLong() {
+    // returns true if the sub_feed is too long
+    return $('#sub_feed option').length > 10;
+  }
 
-    $("#sub_feed").empty();
+  function isValidInput(e) {
+    // ensures that the escape key can be used to close the suggestions list
+    if (e.key === "Escape") {
+      return false;
+    }
+    // filters out characters such as ArrowUp, ArrowDown etc so that the
+    // arrow keys can be used to scroll through the suggestions
+    return e.keyIdentifier.startsWith("U+");
+  }
 
-    //continuously get the value in the search field
-    var val = $("input#subreddit").val();
+  function updateSuggestions(suggestions) {
+    for (var i = 0; i < suggestions.length; i++) {
+      $('#sub_feed').append('<option value="' + suggestions[i] + '">');
+    }
+  }
 
-    //search only if the length of val in the input box is 4 or greater
+  function getSuggestions(e) {
+    if (isValidInput(e) === false) {
+      return;
+    }
+    // get rid of the old suggestions so that we have room to add new ones
+    $('#sub_feed').empty();
 
-    if (val.length > 2) {
+    // keep the lowercase representation so that we can compare the top
+    // subreddit names to it later
+    var query = $('#subreddit').val().toLowerCase();
+    if (query.length < 3) {
+      // there's no point offering suggestions for such a short subreddit name
+      return;
+    }
 
-      $.ajax( {
-        url: "https://www.reddit.com/search.json?q="+val+"&type=sr",
-        dataType: "json",
-        type: "GET",
-        success: function(json) {
+    $.ajax({
+      url: '../backend/topsubreddits.json',
+      dataType: 'json',
+      type: 'GET',
+      success: function (json) {
+        json.sort(function (a, b) {
+          // make the sorting case-insensitive so that suggestions are
+          // ordered correctly
+          var atemp = a.toLowerCase(), btemp = b.toLowerCase();
+          return atemp > btemp ? 1 : atemp < btemp ? -1 : 0;
+        });
 
-          //sub contains an array of objects. get subreddit names
-
-          var sub = json.data.children;
-          for (var i = 0; i < sub.length; i++) {
-
-            //the array is wrapped in an object. So searching for all objects
-
-            if (typeof sub[i] === "object") {
-              for (var key in sub[i]) {
-                if (sub[i].hasOwnProperty(key)) {
-                  if (key === "data") {
-                    for (var k in sub[i][key]) {
-
-                      //searches for the key display_name
-
-                      if (k === "display_name") {
-
-                        //append the datalist element with the various suggestions
-                        $("#sub_feed").append("<option value='"+sub[i][key][k]+"'>");
-                      }
-                    }
-                  }
-                }
-              }
+        var suggestions = [];
+        for (var i = 0; i < json.length; i++) {
+          if (suggestions.length >= 10) {
+            // having too many suggestions gives a bad user experience
+            break;
+          }
+          // make the subreddit name lowercase so we can compare it with
+          // the user's query
+          if (json[i].toLowerCase().startsWith(query)) {
+            if ($.inArray(json[i], suggestions) === -1) {
+              // store suggestions in a variable to prevent duplicates
+              // from being added
+              suggestions.push(json[i]);
             }
           }
         }
-      });
-    }
-    else {
-
-      //if suggestions are less than 4 at any time do not display any suggestions
-      $("#sub_feed").empty();
-    }
-  });
-};
-
-$(document).ready(main);
+        updateSuggestions(suggestions);
+      }
+    });
+  }
+  // use JS instead of jQuery so that we can get the event data of the keypress
+  var input = document.getElementById("subreddit");
+  input.addEventListener('keyup', function (e) {getSuggestions(e); });
+});
