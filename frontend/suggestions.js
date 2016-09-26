@@ -9,14 +9,9 @@ $(document).ready(function () {
     return $('#sub_feed option').length > 10;
   }
 
-  function isValidInput(e) {
-    // ensures that the escape key can be used to close the suggestions list
-    if (e.key === "Escape") {
-      return false;
-    }
-    // filters out characters such as ArrowUp, ArrowDown etc so that the
-    // arrow keys can be used to scroll through the suggestions
-    return e.keyIdentifier.startsWith("U+");
+  function isValidKeypress(e) {
+    // returns true if the key pressed is a letter or a backspace
+    return e.code.startsWith("Key") || e.code === "Backspace";
   }
 
   function updateSuggestions(suggestions) {
@@ -26,7 +21,7 @@ $(document).ready(function () {
   }
 
   function getSuggestions(e) {
-    if (isValidInput(e) === false) {
+    if (isValidKeypress(e) === false) {
       return;
     }
     // get rid of the old suggestions so that we have room to add new ones
