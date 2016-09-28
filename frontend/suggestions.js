@@ -1,17 +1,14 @@
-/*jslint browser: true plusplus: true indent:2 maxlen: 80*/
-/*global $, jQuery, alert, console*/
-
 $(document).ready(function () {
   'use strict';
 
-  function feedTooLong() {
+  function feedTooLong(suggestions) {
     // returns true if the sub_feed is too long
-    return $('#sub_feed option').length > 10;
+    return suggestions.length >= 10;
   }
 
   function isValidKeypress(e) {
     // returns true if the key pressed is a letter or a backspace
-    return e.code.startsWith("Key") || e.code === "Backspace";
+    return e.code.startsWith('Key') || e.code === 'Backspace';
   }
 
   function updateSuggestions(suggestions) {
@@ -49,7 +46,7 @@ $(document).ready(function () {
 
         var suggestions = [];
         for (var i = 0; i < json.length; i++) {
-          if (suggestions.length >= 10) {
+          if (feedTooLong(suggestions)) {
             // having too many suggestions gives a bad user experience
             break;
           }
@@ -68,6 +65,6 @@ $(document).ready(function () {
     });
   }
   // use JS instead of jQuery so that we can get the event data of the keypress
-  var input = document.getElementById("subreddit");
+  var input = document.getElementById('subreddit');
   input.addEventListener('keyup', function (e) {getSuggestions(e); });
 });
