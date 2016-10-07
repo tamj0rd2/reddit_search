@@ -21,9 +21,20 @@ $(document).ready(function () {
     window.open(url, '_blank').focus();
   }
 
+  function addSubToStorage() {
+    chrome.storage.local.get('subs', function updateStorage(result) {
+      var subs = result.subs;
+      subs.push($('#subreddit').val());
+      chrome.storage.local.set({'subs': subs});
+    });
+  }
+
   $('button').click(function () {
     if ($('#search_query').val()) {
-      /* if search_query has a value, perform the search */
+      /* if there was no suggestion for the subreddit, add it to the storage */
+      if ($('#sub_feed option').length === 0 && $('#subreddit').val()) {
+        addSubToStorage();
+      }
       search();
     } else {
       /* otherwise show warnings */
