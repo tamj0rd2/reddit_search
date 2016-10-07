@@ -1,26 +1,21 @@
 $(document).ready(function () {
   'use strict';
 
-  function feedTooLong(suggestions) {
-    // returns true if the sub_feed is too long
-    return suggestions.length >= 10;
-  }
+  function showSuggestions(result) {
+    var subs = result.subs;
 
-  function isValidKeypress(e) {
-    // returns true if the key pressed is a letter or a backspace
-    return e.code.startsWith('Key') || e.code === 'Backspace';
-  }
-
-  function updateSuggestions(suggestions) {
-    for (var i = 0; i < suggestions.length; i++) {
-      $('#sub_feed').append('<option value="' + suggestions[i] + '">');
+    function feedTooLong(suggestions) {
+      // returns true if the sub_feed is too long
+      return suggestions.length >= 10;
     }
-  }
 
-  function getSuggestions(e) {
-    if (isValidKeypress(e) === false) {
-      return;
+    function setSuggestions(suggestions) {
+      // adds the suggestions to the sub_feed
+      for (var i = 0; i < suggestions.length; i++) {
+        $('#sub_feed').append('<option value="' + suggestions[i] + '">');
+      }
     }
+
     // get rid of the old suggestions so that we have room to add new ones
     $('#sub_feed').empty();
 
@@ -32,39 +27,26 @@ $(document).ready(function () {
       return;
     }
 
-    $.ajax({
-      url: '../backend/topsubreddits.json',
-      dataType: 'json',
-      type: 'GET',
-      success: function (json) {
-        json.sort(function (a, b) {
-          // make the sorting case-insensitive so that suggestions are
-          // ordered correctly
-          var atemp = a.toLowerCase(), btemp = b.toLowerCase();
-          return atemp > btemp ? 1 : atemp < btemp ? -1 : 0;
-        });
-
-        var suggestions = [];
-        for (var i = 0; i < json.length; i++) {
-          if (feedTooLong(suggestions)) {
-            // having too many suggestions gives a bad user experience
-            break;
-          }
-          // make the subreddit name lowercase so we can compare it with
-          // the user's query
-          if (json[i].toLowerCase().startsWith(query)) {
-            if ($.inArray(json[i], suggestions) === -1) {
-              // store suggestions in a variable to prevent duplicates
-              // from being added
-              suggestions.push(json[i]);
-            }
-          }
-        }
-        updateSuggestions(suggestions);
+    var suggestions = [];
+    for (var i = 0; i < subs.length; i++) {
+      if (feedTooLong(suggestions)) {
+        // having too many suggestions gives a bad user experience
+        break;
       }
-    });
+      // make the subreddit name lowercase so we can compare it with
+      // the user's query
+      if (subs[i].toLowerCase().startsWith(query)) {
+        if ($.inArray(subs[i], suggestions) === -1) {
+          // store suggestions in a variable to prevent duplicates
+          // from being added
+          suggestions.push(subs[i]);
+        }
+      }
+    }
+    setSuggestions(suggestions);
   }
-  // use JS instead of jQuery so that we can get the event data of the keypress
-  var input = document.getElementById('subreddit');
-  input.addEventListener('keyup', function (e) {getSuggestions(e); });
+
+  $('#subreddit').on('input', function getSubs() {
+    chrome.storage.local.get('subs', showSuggestions);
+  });
 });
