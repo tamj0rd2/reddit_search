@@ -46,7 +46,13 @@ $(document).ready(function () {
     setSuggestions(suggestions);
   }
 
+  function validateInput() {
+    var newVal = $('#subreddit').val().replace(/[^a-zA-Z0-9_]+/g, '');
+    $('#subreddit').val(newVal);
+  }
+
   $('#subreddit').on('input', function getSubs() {
+    validateInput();
     chrome.storage.local.get('subs', showSuggestions);
   });
 });
