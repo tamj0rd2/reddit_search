@@ -13,9 +13,14 @@ $(document).ready(function () {
     return url;
   }
 
-  function search() {
+  function search(tabOption) {
     var url = createSearchUrl();
-    window.open(url, '_blank').focus();
+    if (tabOption === 'cur_tab') {
+      chrome.tabs.update({url: url});
+      window.close();
+    } else {
+      chrome.tabs.create({url: url});
+    }
   }
 
   function addSubToStorage() {
@@ -32,7 +37,8 @@ $(document).ready(function () {
       if ($('#sub_feed option').length === 0 && $('#subreddit').val()) {
         addSubToStorage();
       }
-      search();
+      var tabOption = $(this).val();
+      search(tabOption);
     } else {
       /* otherwise show warnings */
       $('#query_group').addClass('has-error');
