@@ -1,4 +1,4 @@
-$(document).ready(function () {
+$(document).ready(function searchAction() {
   'use strict';
 
   function createSearchUrl() {
@@ -45,5 +45,27 @@ $(document).ready(function () {
       $('#help1').removeClass('vishid');
       return false;
     }
+  });
+});
+
+$(document).ready(function defaultSearchOption() {
+  'use strict';
+
+  function setDefaultBtn(btnValue) {
+    var defaultBtn = $('button[value="' + btnValue + '"]');
+    var otherBtn = $('button[value!="' + btnValue + '"]');
+
+    $(defaultBtn)
+      .addClass('btn-primary')
+      .removeClass('btn-default')
+      .prop('type', 'submit');
+    $(otherBtn)
+      .addClass('btn-default')
+      .removeClass('btn-primary')
+      .prop('type', 'button');
+  }
+
+  chrome.storage.local.get('defaultTab', function initDOM(result) {
+    setDefaultBtn(result.defaultTab);
   });
 });

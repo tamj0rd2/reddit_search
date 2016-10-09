@@ -9,12 +9,18 @@ chrome.runtime.onInstalled.addListener(function (details) {
     });
   }
 
+  function initDefaultTab() {
+    chrome.storage.local.set({'defaultTab': 'new_tab'});
+  }
+
+  function initSubs(subs) {
+    subs = caseInsensitiveSort(subs);
+    chrome.storage.local.set({'subs': subs});
+  }
+
   if (details.reason === 'install') {
     /* Initialises the chrome storage for the extension */
-    $.getJSON('backend/topsubreddits.json', function updateStorage(subs) {
-      chrome.storage.local.remove('subs');
-      subs = caseInsensitiveSort(subs);
-      chrome.storage.local.set({'subs': subs});
-    });
+    $.getJSON('backend/topsubreddits.json', initSubs);
+    initDefaultTab();
   }
 });
