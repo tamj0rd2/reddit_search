@@ -52,6 +52,7 @@ $(document).ready(function defaultSearchOption() {
   'use strict';
 
   function setDefaultBtn(btnValue) {
+    /* set the default search option to whichever button's value === btnValue */
     var defaultBtn = $('button[value="' + btnValue + '"]');
     var otherBtn = $('button[value!="' + btnValue + '"]');
 
@@ -67,5 +68,19 @@ $(document).ready(function defaultSearchOption() {
 
   chrome.storage.local.get('defaultTab', function initDOM(result) {
     setDefaultBtn(result.defaultTab);
+  });
+
+  $('a').click(function () {
+    chrome.storage.local.get('defaultTab', function switchDefaultBtn(result) {
+      var newDefault;
+      /* figure out which button will need to be our new default button */
+      if (result.defaultTab === 'cur_tab') {
+        newDefault = 'new_tab';
+      } else {
+        newDefault = 'cur_tab';
+      }
+      setDefaultBtn(newDefault);
+      chrome.storage.local.set({'defaultTab': newDefault});
+    });
   });
 });
