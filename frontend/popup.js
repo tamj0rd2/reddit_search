@@ -34,6 +34,7 @@ $(document).ready(function searchAction() {
   $('button').click(function () {
     if ($('#search_query').val()) {
       /* if there was no suggestion for the subreddit, add it to the storage */
+      // TODO: needs fix. sub_feed no longer exists in the html
       if ($('#sub_feed option').length === 0 && $('#subreddit').val()) {
         addSubToStorage();
       }
