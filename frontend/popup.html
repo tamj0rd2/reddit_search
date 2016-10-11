@@ -11,19 +11,21 @@
   <div class="container" style="min-width: 300px;">
     <body>
       <form>
+        <div id="query_group" class="form-group">
+          <label class="control-label" for="search_query">Search query
+            <small id="help1" class="help-block vishid" style="display: inline">
+              (don't leave this blank)
+            </small>
+          </label>
+          <input type="text" class="form-control" id="search_query" aria-describedby="help1"
+                 placeholder="How do I grow a beard?" autofocus>
+        </div>
         <div class="form-group">
-          <label for="subreddit">Subreddit:</label>
+          <label for="subreddit">Subreddit</label>
           <div class="input-group">
             <span class="input-group-addon">r/</span>
-            <input autofocus type="text" class="form-control" id="subreddit"
-                   placeholder="subreddit">
+            <input type="text" class="form-control" id="subreddit" placeholder="subreddit">
           </div>
-        </div>
-        <div id="query_group" class="form-group">
-          <label class="control-label" for="search_query">Search query:</label>
-          <input type="text" class="form-control" id="search_query" aria-describedby="help1"
-                 placeholder="How do I grow a beard?">
-          <small id="help1" class="help-block vishid">This area cannot be left empty!</small>
         </div>
         <div class="text-center">
           <div class="btn-group" role="group">
