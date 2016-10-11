@@ -23,20 +23,30 @@ $(document).ready(function searchAction() {
     }
   }
 
-  function addSubToStorage() {
-    chrome.storage.local.get('subs', function updateStorage(result) {
-      var subs = result.subs;
-      subs.push($('#subreddit').val());
-      chrome.storage.local.set({'subs': subs});
-    });
+  function addSubToStorage(sub) {
+    /* adds the sub to the chrome storage if it's not already in there */
+    var currentSuggestions = $('.typeahead.dropdown-menu')
+      // remove the strong tags so that we can find the subreddit in the html
+      .html()
+      .toLowerCase()
+      .replace(/<strong>|<\/strong>/g, '');
+    var subToFind = RegExp('>' + sub.toLowerCase() + '<');
+
+    if (subToFind.test(currentSuggestions) === false) {
+      // add the sub to chrome storage, since there wasn't a suggestion for it
+      chrome.storage.local.get('subs', function addASub(result) {
+        var subs = result.subs;
+        subs.push(sub);
+        chrome.storage.local.set({'subs': subs});
+      });
+    }
   }
 
   $('button').click(function () {
     if ($('#search_query').val()) {
-      /* if there was no suggestion for the subreddit, add it to the storage */
-      // TODO: needs fix. sub_feed no longer exists in the html
-      if ($('#sub_feed option').length === 0 && $('#subreddit').val()) {
-        addSubToStorage();
+      var sub = $('#subreddit').val();
+      if (sub.length > 2) {
+        addSubToStorage(sub);
       }
       var tabOption = $(this).val();
       search(tabOption);
