@@ -34,11 +34,7 @@ $(document).ready(function searchAction() {
 
     if (subToFind.test(currentSuggestions) === false) {
       // add the sub to chrome storage, since there wasn't a suggestion for it
-      chrome.storage.local.get('subs', function addASub(result) {
-        var subs = result.subs;
-        subs.push(sub);
-        chrome.storage.local.set({'subs': subs});
-      });
+      chrome.runtime.sendMessage({msgType: 'add_sub', sub: sub});
     }
   }
 
