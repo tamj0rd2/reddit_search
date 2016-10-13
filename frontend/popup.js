@@ -49,9 +49,16 @@ $(document).ready(function searchAction() {
     } else {
       /* otherwise show warnings */
       $('#query_group').addClass('has-error');
-      $('#help1').removeClass('vishid');
+      $('#help1').show();
       return false;
     }
+  });
+
+  $('#help1').hide();
+
+  $('#search_query').on('input', function hideWarnings() {
+    $('#help1').fadeOut(200);
+    $('#query_group').removeClass('has-error');
   });
 });
 
