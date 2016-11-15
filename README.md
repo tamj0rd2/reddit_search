@@ -1,6 +1,10 @@
 # Reddit Search
-This Google Chrome extension allows you to easily search reddit by using
+This **Chromium extension** allows you to easily search reddit by using
 Google's search engine.
+
+## Requirements
+* [Chromium](https://chromium.woolyss.com/) because [Google Chrome forcibly disables
+the extension](https://blog.chromium.org/2015/05/continuing-to-protect-chrome-users-from.html)
 
 ## Installation steps
 1. Go to the [releases](https://github.com/tamj0rd2/reddit_search/releases) page
