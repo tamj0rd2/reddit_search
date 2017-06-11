@@ -3,18 +3,19 @@
 
   "name": "Reddit Search",
   "description": "This extension allows you to easily search reddit by using Google's search engine",
-  "version": "1.0",
+  "version": "1.0.1",
 
   "browser_action": {
     "default_popup": "frontend/popup.html"
   },
   "background": {
-    "scripts": ["frontend/jquery/jquery.min.js", "backend/eventPage.js"],
+    "scripts": [
+      "frontend/jquery/jquery.min.js",
+      "backend/eventPage.js"
+    ],
     "persistent": false
   },
   "permissions": [
-    "activeTab",
-    "storage",
-    "https://ajax.googleapis.com/"
+    "storage"
   ]
 }
