@@ -1,6 +1,7 @@
 # Reddit Search
 This **Chromium extension** allows you to easily search reddit by using
-Google's search engine.
+Google's search engine. I made this because I'm not a huge fan of the way Reddit's
+built in search works.
 
 ## Requirements
 * [Chromium](https://chromium.woolyss.com/) because [Google Chrome forcibly disables
@@ -20,5 +21,3 @@ plugins for your text editor/IDE of choice or follow these guidelines:
 - Use LF line endings (google how to set your line endings in your editor of
   choice)
 - For `.js`, `.json`, `.css` and `.html` files, indent with two spaces
-
-When writing commit messages, please stick to the format of the existing commits.
