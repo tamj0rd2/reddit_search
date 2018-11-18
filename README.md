@@ -1,6 +1,7 @@
 # Reddit Search
 This **Chromium extension** allows you to easily search reddit by using
-Google's search engine.
+Google's search engine. I've created this as an alternative to Reddit's
+sometimes unreliable search.
 
 ## Requirements
 * [Chromium](https://chromium.woolyss.com/) because [Google Chrome forcibly disables
